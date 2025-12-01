@@ -3,7 +3,6 @@ import { Cart } from "../models/cart.js";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
-import sendEmail from "../services/mailer.js";
 
 import { Resend } from 'resend';
 
