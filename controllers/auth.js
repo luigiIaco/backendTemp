@@ -94,7 +94,7 @@ export const recoverPassword = async (req, res) => {
   user.resetTokenExpire = resetTokenExpire;
   await user.save();
 
-  const resetLink = `http://localhost:3002/resetPassword?token=${resetToken}&id=${user._id}`;
+  const resetLink = `https://foodreact45.netlify.app/resetPassword?token=${resetToken}&id=${user._id}`;
   await sendEmail(user.email, resetLink);
 
   res.json({ status: "ok", message: "Email inviata con link per il reset" });
