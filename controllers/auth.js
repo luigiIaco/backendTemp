@@ -4,21 +4,18 @@ import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
 
-import { Resend } from 'resend';
+import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function sendEmail(to,resetLink) {
-  const result = await resend.emails.send({
-    from: 'luigiantonioiacomino1111@gmail.com',
+export async function sendEmail(to, resetLink) {
+  await resend.emails.send({
+    from: "Acme <onboarding@resend.dev>",
     to: to,
-    subject: 'Test email',
+    subject: "Reset Password",
     html: `<p>${resetLink}</p>`,
   });
-
-  console.log(result);
 }
-
 
 export const login = async (req, res) => {
   const { data } = req.body;
@@ -98,7 +95,7 @@ export const recoverPassword = async (req, res) => {
   await user.save();
 
   const resetLink = `http://localhost:3002/resetPassword?token=${resetToken}&id=${user._id}`;
-  await sendEmail(user.email,resetLink);
+  await sendEmail(user.email, resetLink);
 
   res.json({ status: "ok", message: "Email inviata con link per il reset" });
 };
