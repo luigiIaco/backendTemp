@@ -30,7 +30,7 @@ export const login = async (req, res) => {
   if (await bcrypt.compare(password, user.password)) {
     const token = jwt.sign(
       { id: user._id, username: user.username },
-      process.env.JWT_SECRET
+      "3272ca55c8a0acb64d78eb48a0fbea8db70f6346cfb83c2875991cf63f824a9d"
     );
     return res.status(200).json({ status: "ok", data: token, user: user });
   }
@@ -94,7 +94,7 @@ export const recoverPassword = async (req, res) => {
   user.resetTokenExpire = resetTokenExpire;
   await user.save();
 
-  const resetLink = `https://foodreact45.netlify.app/resetPassword?token=${resetToken}&id=${user._id}`;
+  const resetLink = `https://frontendreactfood.vercel.app/resetPassword?token=${resetToken}&id=${user._id}`;
   await sendEmail(user.email, resetLink);
 
   res.json({ status: "ok", message: "Email inviata con link per il reset" });
