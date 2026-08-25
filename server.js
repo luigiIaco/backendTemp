@@ -10,9 +10,7 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(cors({
-  origin: "https://foodreact45.netlify.app/" // o il dominio del tuo frontend
-}));
+app.use(cors({}));
 
 app.use("/auth", authRoutes);
 app.use("/product", productRoutes);
